@@ -1,10 +1,8 @@
 package softuni.ticket.JDBC;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import softuni.ticket.JDBC.interfaces.ColumnDef;
 import softuni.ticket.JDBC.interfaces.JDBCManager;
@@ -14,7 +12,6 @@ public class JDBCTableManagerImpl implements TablesManager {
 	
 	private static TablesManager instance = null;
 	private JDBCManager jdbcmanager;
-	private Statement stmn;
 
 	private JDBCTableManagerImpl() {
 		jdbcmanager = JDBCManagerImpl.getInstance();
@@ -27,13 +24,24 @@ public class JDBCTableManagerImpl implements TablesManager {
 		return instance;
 	}
 
-	
+	@Override
 	public void createTable(String tableName, List<ColumnDef> columns) throws SQLException {
-		
+		jdbcmanager.executeQuery(String.format(
+				"CREATE TABLE %s (%s)", tableName,
+				columns
+				.stream()
+				.map(colDef -> colDef.getName() + " " + colDef.getType())
+				.collect(Collectors.joining(", "))));
 	}
 
+	@Override
 	public void dropTable(String tableName) throws SQLException {
-		
+		jdbcmanager.executeDDL(String.format("DROP TABLE %s", tableName));
 	}
-
+	
+	@Override
+	public boolean tableExists(String tableName) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

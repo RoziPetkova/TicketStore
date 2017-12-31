@@ -24,13 +24,13 @@ public class JDBCManagerImpl implements JDBCManager {
 		if (instance == null) {
 			instance = new JDBCManagerImpl();
 		}
+
 		return instance;
 	}
 
 	public ResultSet executeQuery(String sql) throws SQLException {
 		stmn = myConnection.createStatement();
-		return stmn.executeQuery(sql);
-		 
+		return stmn.executeQuery(sql);		 
 	}
 
 	public void executeDDL(String sql) throws SQLException {
@@ -39,8 +39,8 @@ public class JDBCManagerImpl implements JDBCManager {
 	}
 
 	public List<String> getAllTables() {
-		
 		List<String> tables = new ArrayList<String>();
+		
 		try {
 			stmn = myConnection.createStatement();
 			ResultSet query = stmn.executeQuery("SELECT TABLE_NAME FROM INFORMATION_SCHEMA");
@@ -52,6 +52,7 @@ public class JDBCManagerImpl implements JDBCManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
 		return tables;
 	}
 }

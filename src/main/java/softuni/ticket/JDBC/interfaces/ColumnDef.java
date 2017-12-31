@@ -13,11 +13,11 @@ public class ColumnDef {
 		return name;
 	}
 
-	public DataType getType() {
-		return type;
+	public String getType() {
+		return type.toString();
 	}
 
-	private enum DataType {
+	public enum DataType {
 		Integer("integer"),
 		Varchar("varchar");
 
