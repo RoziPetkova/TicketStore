@@ -18,14 +18,14 @@ public class TestDataBase extends HttpServlet {
 	private JDBCManager jdbcManager;
 
 	private static final long serialVersionUID = 1L;
-	
+
 	public TestDataBase() {
 		jdbcManager = JDBCManagerImpl.getInstance();
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//int a = Integer.valueOf(req.getParameter("a"));
+		// int a = Integer.valueOf(req.getParameter("a"));
 		ResultSet executeQuery = null;
 		try {
 			executeQuery = jdbcManager.executeQuery("SELECT * FROM TEST");

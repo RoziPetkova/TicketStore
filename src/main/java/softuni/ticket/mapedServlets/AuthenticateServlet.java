@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class AuthenticateServlet extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final String USER = "user";
 
 	@Override
@@ -25,7 +29,7 @@ public class AuthenticateServlet extends HttpServlet {
 		if (user != null && pass != null && user.equals("admin") && pass.equals("admin")) {
 			HttpSession session = req.getSession(true);
 			session.setAttribute(USER, user);
-			
+	
 			resp.getWriter().write("<html> user authenticated </html>");
 		}
 

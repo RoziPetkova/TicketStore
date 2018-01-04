@@ -1,14 +1,15 @@
 package softuni.ticket.JDBC;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import softuni.ticket.JDBC.interfaces.JDBCManager;
 
 public class JDBCManagerImpl implements JDBCManager {
-
-	private static JDBCManager instance = null;
+	private static JDBCManager instance;
 	private Connection myConnection;
 	private Statement stmn;
 
@@ -17,6 +18,7 @@ public class JDBCManagerImpl implements JDBCManager {
 			myConnection = DriverManager.getConnection("jdbc:h2:~/h2Database/testDB");
 		} catch (SQLException e) {
 			e.printStackTrace();
+			System.exit(-1);
 		}
 	}
 
@@ -30,29 +32,11 @@ public class JDBCManagerImpl implements JDBCManager {
 
 	public ResultSet executeQuery(String sql) throws SQLException {
 		stmn = myConnection.createStatement();
-		return stmn.executeQuery(sql);		 
+		return stmn.executeQuery(sql);
 	}
 
 	public void executeDDL(String sql) throws SQLException {
 		stmn = myConnection.createStatement();
 		stmn.executeUpdate(sql);
-	}
-
-	public List<String> getAllTables() {
-		List<String> tables = new ArrayList<String>();
-		
-		try {
-			stmn = myConnection.createStatement();
-			ResultSet query = stmn.executeQuery("SELECT TABLE_NAME FROM INFORMATION_SCHEMA");
-			
-			while (query.next()) {
-				tables.add(query.getString("TABLE_NAME"));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return tables;
 	}
 }

@@ -24,6 +24,7 @@ public class AuthenticateFilter implements Filter {
 			HttpServletRequest httpRequest = (HttpServletRequest) request;
 
 			if(httpRequest.getRequestURI().startsWith("/authenticate") ||
+				httpRequest.getRequestURI().startsWith("/singNewUser") ||
 				(httpRequest.getSession(false) != null))
 				chain.doFilter(request, response);
 			else
