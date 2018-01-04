@@ -51,7 +51,7 @@ public class CreateEventTicket extends HttpServlet{
 		String eventInfo = req.getParameter("eventInfo"); // Event description/presentation text.
 		double ticketPrice = Double.parseDouble(req.getParameter("ticketPrice"));
 		
-		String.format("INSERT INTO %s"
+		String sql = String.format("INSERT INTO %s"
 				+ " VALUES (1, '%s', '%s','%s', '%d', '%S', '%d')", 
 				Tables.Tickets.name(), name, location, date, ticketsAmmount, eventInfo, ticketPrice);
 		
