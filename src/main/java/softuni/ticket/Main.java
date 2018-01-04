@@ -5,6 +5,7 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 
 import softuni.ticket.mapedServlets.AuthenticateFilter;
 import softuni.ticket.mapedServlets.AuthenticateServlet;
+import softuni.ticket.mapedServlets.CreateEvent;
 import softuni.ticket.mapedServlets.LogOutServlet;
 import softuni.ticket.mapedServlets.SignNewUser;
 import softuni.ticket.mapedServlets.TestDataBase;
@@ -29,6 +30,7 @@ public class Main {
 		handler.addServlet(SignNewUser.class, "/singNewUser");
 		handler.addServlet(AuthenticateServlet.class, "/authenticate");
 		handler.addServlet(LogOutServlet.class, "/logout");
+		handler.addServlet(CreateEvent.class, "/createEvent");
 		
 		handler.addFilter(AuthenticateFilter.class, "/*", null);
 
