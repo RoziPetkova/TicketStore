@@ -20,9 +20,8 @@ public class TablesManagerImpl implements TablesManager {
 	@Override
 	public void createTable(String tableName, List<ColumnDef> columns) throws SQLException {
 		jdbcManager.executeDDL(String.format("CREATE TABLE IF NOT EXISTS %s (%s)", 
-				tableName, 
-				columns
-				.stream()
+			tableName, 
+			columns.stream()
 				.map(colDef -> colDef.getName() + " " + colDef.getType())
 				.collect(Collectors.joining(", "))));
 	}

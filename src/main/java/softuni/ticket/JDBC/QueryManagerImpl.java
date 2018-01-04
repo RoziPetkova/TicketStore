@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import softuni.ticket.JDBC.interfaces.JDBCManager;
 import softuni.ticket.JDBC.interfaces.QueryManager;
 import softuni.ticket.JDBC.tavlesAndColumns.Columns;
-import softuni.ticket.JDBC.tavlesAndColumns.Tables;
 
 public class QueryManagerImpl implements QueryManager {
 

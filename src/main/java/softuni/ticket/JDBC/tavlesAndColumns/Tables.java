@@ -1,36 +1,44 @@
 package softuni.ticket.JDBC.tavlesAndColumns;
 
-import static softuni.ticket.JDBC.tavlesAndColumns.Columns.*;
+import static softuni.ticket.JDBC.tavlesAndColumns.Columns.AMOUNT;
+import static softuni.ticket.JDBC.tavlesAndColumns.Columns.EVENT_DATE;
+import static softuni.ticket.JDBC.tavlesAndColumns.Columns.INFORMATION;
+import static softuni.ticket.JDBC.tavlesAndColumns.Columns.LOCATION;
+import static softuni.ticket.JDBC.tavlesAndColumns.Columns.NAME;
+import static softuni.ticket.JDBC.tavlesAndColumns.Columns.PASSWORD;
+import static softuni.ticket.JDBC.tavlesAndColumns.Columns.TICKET_ID;
+import static softuni.ticket.JDBC.tavlesAndColumns.Columns.TICKET_PRICE;
+import static softuni.ticket.JDBC.tavlesAndColumns.Columns.USER_ID;
 
 import java.util.Arrays;
 import java.util.List;
 
 public enum Tables {
 	Tickets(Arrays.asList(
-		TICKET_ID.getColumnDefs(), 
-		NAME.getColumnDefs(), 
-		LOCATION.getColumnDefs(),
-		EVENT_DATE.getColumnDefs(),
-		AMOUNT.getColumnDefs(), 
-		INFORMATION.getColumnDefs(), 
-		TICKET_PRICE.getColumnDefs())),
+		TICKET_ID, 
+		NAME, 
+		LOCATION,
+		EVENT_DATE,
+		AMOUNT, 
+		INFORMATION, 
+		TICKET_PRICE)),
 	
 	Users(Arrays.asList(
-		USER_ID.getColumnDefs(), 
-		NAME.getColumnDefs(), 
-		PASSWORD.getColumnDefs())),
+		USER_ID, 
+		NAME, 
+		PASSWORD)),
 	
 	SoldTickets(Arrays.asList(
-			TICKET_ID.getColumnDefs(), 
-			USER_ID.getColumnDefs()));
+		TICKET_ID, 
+		USER_ID));
 
-	private List<ColumnDef> columnDefs;
+	private List<Columns> columns;
 
-	private Tables(List<ColumnDef> columnDefs) {
-		this.columnDefs = columnDefs;
+	private Tables(List<Columns> columns) {
+		this.columns = columns;
 	}
 
-	public List<ColumnDef> getColumnDefs() {
-		return columnDefs;
+	public List<Columns> getColumns() {
+		return columns;
 	}
 }

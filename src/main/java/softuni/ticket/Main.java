@@ -30,7 +30,7 @@ public class Main {
 		handler.addServlet(SignNewUser.class, "/singNewUser");
 		handler.addServlet(AuthenticateServlet.class, "/authenticate");
 		handler.addServlet(LogOutServlet.class, "/logout");
-		handler.addServlet(CreateEvent.class, "/createEvent");
+//		handler.addServlet(CreateEvent.class, "/createEvent");
 		
 		handler.addFilter(AuthenticateFilter.class, "/*", null);
 
