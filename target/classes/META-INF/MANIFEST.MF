@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Built-By: Setfan
+Class-Path: lib/jetty-servlet-9.4.8.v20171121.jar lib/jetty-security-9
+ .4.8.v20171121.jar lib/jetty-server-9.4.8.v20171121.jar lib/javax.ser
+ vlet-api-3.1.0.jar lib/jetty-http-9.4.8.v20171121.jar lib/jetty-util-
+ 9.4.8.v20171121.jar lib/jetty-io-9.4.8.v20171121.jar lib/h2-1.4.196.j
+ ar
+Build-Jdk: 1.8.0_151
+Created-By: Maven Integration for Eclipse
+Main-Class: softuni.ticket.Main
+
