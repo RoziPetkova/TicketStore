@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import softuni.ticket.JDBC.JDBCManagerImpl;
-import softuni.ticket.JDBC.TablesManagerImpl;
-import softuni.ticket.JDBC.interfaces.TablesManager;
-import softuni.ticket.JDBC.tavlesAndColumns.Tables;
+import softuni.ticket.JDBC.tablesAndColumns.Tables;
 
 public class SignNewUser extends HttpServlet {
 

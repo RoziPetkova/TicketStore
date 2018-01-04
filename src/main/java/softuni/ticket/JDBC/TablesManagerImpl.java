@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import softuni.ticket.JDBC.interfaces.JDBCManager;
 import softuni.ticket.JDBC.interfaces.TablesManager;
-import softuni.ticket.JDBC.tavlesAndColumns.ColumnDef;
+import softuni.ticket.JDBC.tablesAndColumns.ColumnDef;
 
 public class TablesManagerImpl implements TablesManager {
 	private JDBCManager jdbcManager;

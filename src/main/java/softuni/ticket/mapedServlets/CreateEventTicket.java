@@ -2,10 +2,7 @@ package softuni.ticket.mapedServlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import softuni.ticket.JDBC.JDBCManagerImpl;
-import softuni.ticket.JDBC.tavlesAndColumns.Tables;
+import softuni.ticket.JDBC.tablesAndColumns.Tables;
 
 public class CreateEventTicket extends HttpServlet{
 

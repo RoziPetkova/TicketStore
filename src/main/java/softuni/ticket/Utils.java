@@ -2,8 +2,8 @@ package softuni.ticket;
 
 import java.util.List;
 
-import softuni.ticket.JDBC.tavlesAndColumns.ColumnDef;
-import softuni.ticket.JDBC.tavlesAndColumns.Tables;
+import softuni.ticket.JDBC.tablesAndColumns.ColumnDef;
+import softuni.ticket.JDBC.tablesAndColumns.Tables;
 
 public class Utils {
 	

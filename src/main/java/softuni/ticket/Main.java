@@ -5,7 +5,7 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 
 import softuni.ticket.mapedServlets.AuthenticateFilter;
 import softuni.ticket.mapedServlets.AuthenticateServlet;
-import softuni.ticket.mapedServlets.CreateEvent;
+import softuni.ticket.mapedServlets.CreateEventTicket;
 import softuni.ticket.mapedServlets.LogOutServlet;
 import softuni.ticket.mapedServlets.SignNewUser;
 import softuni.ticket.mapedServlets.TestDataBase;
