@@ -1,8 +1,6 @@
 package softuni.ticket;
 
 import java.sql.SQLException;
-import java.util.stream.Collectors;
-
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -16,11 +14,7 @@ public class ServerInitializedListener implements ServletContextListener {
 		TablesManager tablesManager = new TablesManagerImpl();
 		for(Tables table : Tables.values()) {
 			try {
-				tablesManager.createTable(
-					table.name(),
-					table.getColumns().stream()
-						.map(col -> col.getColumnDefs())
-						.collect(Collectors.toList()));
+				tablesManager.createTable(table.name(), table.getColumns());
 			} catch (SQLException e) {
 				throw new RuntimeException(e);
 			}

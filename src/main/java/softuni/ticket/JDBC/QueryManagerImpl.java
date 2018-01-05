@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import softuni.ticket.JDBC.interfaces.JDBCManager;
 import softuni.ticket.JDBC.interfaces.QueryManager;
 import softuni.ticket.JDBC.tablesAndColumns.Columns;
+import softuni.ticket.JDBC.tablesAndColumns.Tables;
 
 public class QueryManagerImpl implements QueryManager {
 	private final static String SELECT_FROM_TABLE = "SELECT %s FROM %s ";
@@ -22,26 +23,33 @@ public class QueryManagerImpl implements QueryManager {
 	}
 
 	@Override
-	public ResultSet selectFromTable(String tableName) throws SQLException {
-		return jdbcManager.executeQuery(String.format(SELECT_FROM_TABLE, EVERYTHING, tableName));
+	public ResultSet selectFromTable(Tables table) throws SQLException {
+		return jdbcManager.executeQuery(String.format(SELECT_FROM_TABLE, EVERYTHING, table.name()));
 	}
 
 	@Override
-	public ResultSet selectFromTable(String tableName, List<Columns> columns) throws SQLException {
+	public ResultSet selectFromTable(Tables table, List<Columns> columns) throws SQLException {
 		return jdbcManager.executeQuery(String.format(SELECT_FROM_TABLE, 
 				columns
 				.stream()
 				.map(colDef -> colDef.name())
-				.collect(Collectors.joining(", ")), tableName));
+				.collect(Collectors.joining(", ")), 
+				table.name()));
 	}
 
 	@Override
-	public ResultSet selectFromTableWhere(String tableName, String condition) throws SQLException {
-		return jdbcManager.executeQuery(String.format(SELECT_FROM_TABLE_WHERE, tableName, condition));
+	public ResultSet selectFromTableWhere(Tables table, List<Columns> columns, String condition) throws SQLException {
+		return jdbcManager.executeQuery(String.format(SELECT_FROM_TABLE_WHERE, 
+				columns
+				.stream()
+				.map(colDef -> colDef.name())
+				.collect(Collectors.joining(", ")), 
+				table.name(), 
+				condition));
 	}
 
 	@Override
-	public void insertUser(String tableName, List<Columns> columnsNames, List<String> parameters) throws SQLException {
+	public void insertUser(Tables table, List<Columns> columnsNames, List<String> parameters) throws SQLException {
 //		String sql = String.format("INSERT INTO %s"
 //				+ " VALUES (1, '%s', '%s')", Tables.Users.name(), 
 //				columns
@@ -53,11 +61,11 @@ public class QueryManagerImpl implements QueryManager {
 //				.stream()
 //				.collect(Col));
 //		
-		jdbcManager.executeDDL(String.format(INSERT_INTO, tableName));
+		jdbcManager.executeDDL(String.format(INSERT_INTO, table.name()));
 	}
 
 	@Override
-	public void insertTicket(String tableName, List<String> columnsNames, List<String> parameters) throws SQLException {
+	public void insertTicket(Tables table, List<String> columnsNames, List<String> parameters) throws SQLException {
 		// TODO Auto-generated method stub
 	}
 
