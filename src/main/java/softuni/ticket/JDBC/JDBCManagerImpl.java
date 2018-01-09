@@ -1,7 +1,8 @@
-package softuni.ticket.JDBC;
+package softuni.ticket.JDBC; 
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -30,13 +31,24 @@ public class JDBCManagerImpl implements JDBCManager {
 		return instance;
 	}
 
+	@Override
 	public ResultSet executeQuery(String sql) throws SQLException {
 		stmn = myConnection.createStatement();
 		return stmn.executeQuery(sql);
 	}
 
+	@Override
 	public void executeDDL(String sql) throws SQLException {
 		stmn = myConnection.createStatement();
 		stmn.executeUpdate(sql);
+	}
+	
+	public void closeConnection() throws SQLException {
+		myConnection.close();
+	}
+
+	@Override
+	public PreparedStatement prepareStatement(String sql) throws SQLException {
+		return myConnection.prepareStatement(sql);
 	}
 }

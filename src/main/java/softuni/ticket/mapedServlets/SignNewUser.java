@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import softuni.ticket.Utils;
 import softuni.ticket.JDBC.JDBCManagerImpl;
 import softuni.ticket.JDBC.tablesAndColumns.Tables;
 
@@ -28,16 +29,19 @@ public class SignNewUser extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String x = req.getParameter("userName");
 		String y = req.getParameter("password");
-		String sql = String.format("INSERT INTO %s"
-				+ " VALUES (1, '%s', '%s')", Tables.Users.name(), x, y);
+		PrintWriter writer = resp.getWriter();
+
+		String sql = String.format("INSERT INTO %s" 
+								+ " VALUES (1, '%s', '%s')", 
+								Tables.Users.name(), x, y);
+
 		try {
 			JDBCManagerImpl.getInstance().executeDDL(sql);
-			PrintWriter writer = resp.getWriter();
-			
-			writer.write(String.format("<html> Hello user %s! </html>", x));
+
+			writer.write(Utils.jsonSerialize(String.format("Hello user %s!", x)));
 		} catch (SQLException e) {
 			e.printStackTrace();
-			resp.getWriter().write("Something went wrong:");
+			writer.write(Utils.jsonSerialize("Something went wrong:"));
 		}
 	}
 }

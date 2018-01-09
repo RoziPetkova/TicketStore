@@ -3,46 +3,55 @@ package softuni.ticket;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 
+import softuni.ticket.JDBC.JDBCManagerImpl;
+import softuni.ticket.JDBC.interfaces.JDBCManager;
 import softuni.ticket.mapedServlets.AuthenticateFilter;
 import softuni.ticket.mapedServlets.AuthenticateServlet;
 import softuni.ticket.mapedServlets.CreateEventTicket;
+import softuni.ticket.mapedServlets.Search;
 import softuni.ticket.mapedServlets.LogOutServlet;
 import softuni.ticket.mapedServlets.SignNewUser;
-import softuni.ticket.mapedServlets.TestDataBase;
-import softuni.ticket.mapedServlets.TestRozi2;
-import softuni.ticket.mapedServlets.TestServlet;
 
 public class Main {
 	//resources
 	public static void main(String[] args) throws Throwable {
-		initialize();
+		JDBCManager mgr = null;
+		Server server = null;
+		try {
+			mgr = initializeDB();
+			server = getServer();
+			server.join();
+		} catch (Throwable ex) {
+			throw ex;
+		} finally {
+			if(mgr != null)
+				mgr.closeConnection();
+			if(server != null)
+				server.stop();
+		}
 	}
 
-	public static void initialize() throws Throwable {
+	public static JDBCManager initializeDB() {
+		return JDBCManagerImpl.getInstance();
+	}
+
+	public static Server getServer() throws Throwable {
 		Server server = new Server(8088);
 
 		ServletContextHandler handler = new ServletContextHandler(ServletContextHandler.SESSIONS);
 		server.setHandler(handler);
 		
-		handler.addServlet(TestServlet.class, "/testServlet");
-		handler.addServlet(TestRozi2.class, "/rozi");
-		handler.addServlet(TestDataBase.class, "/dataBase");
 		handler.addServlet(SignNewUser.class, "/singNewUser");
 		handler.addServlet(AuthenticateServlet.class, "/authenticate");
 		handler.addServlet(LogOutServlet.class, "/logout");
         handler.addServlet(CreateEventTicket.class, "/createEvent");
+		handler.addServlet(Search.class,"/search");
 		
-		handler.addFilter(AuthenticateFilter.class, "/*", null);
-
+		handler.addFilter(AuthenticateFilter.class, "/*", null);		
 		handler.addEventListener(new ServerInitializedListener());
 
-		try {
-			server.start();
-			server.join();
-		}
-		
-		finally {
-			System.exit(0);
-		}
+		server.start();
+
+		return server;
 	}
 }

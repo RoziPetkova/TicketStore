@@ -13,12 +13,23 @@
 			<artifactId>jetty-servlet</artifactId>
 			<version>9.4.8.v20171121</version>
 		</dependency>
-
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>1.4.196</version>
 		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20171018</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>ticketstore</finalName>

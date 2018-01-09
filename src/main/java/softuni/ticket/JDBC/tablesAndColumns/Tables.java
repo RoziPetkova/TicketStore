@@ -1,6 +1,16 @@
 package softuni.ticket.JDBC.tablesAndColumns;
 
-import static softuni.ticket.JDBC.tablesAndColumns.Columns.*;
+import static softuni.ticket.JDBC.tablesAndColumns.Columns.AMOUNT;
+import static softuni.ticket.JDBC.tablesAndColumns.Columns.EVENT_DATE;
+import static softuni.ticket.JDBC.tablesAndColumns.Columns.INFORMATION;
+import static softuni.ticket.JDBC.tablesAndColumns.Columns.LOCATION;
+import static softuni.ticket.JDBC.tablesAndColumns.Columns.PASSWORD;
+import static softuni.ticket.JDBC.tablesAndColumns.Columns.TICKET_ID;
+import static softuni.ticket.JDBC.tablesAndColumns.Columns.TICKET_NAME;
+import static softuni.ticket.JDBC.tablesAndColumns.Columns.TICKET_PRICE;
+import static softuni.ticket.JDBC.tablesAndColumns.Columns.USER_ID;
+import static softuni.ticket.JDBC.tablesAndColumns.Columns.USER_NAME;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,13 +34,13 @@ public enum Tables {
 		USER_ID,
 		AMOUNT));
 
-	private List<Columns> columns;
+	private List<ColumnDef<?>> columns;
 
-	private Tables(List<Columns> columns) {
+	private Tables(List<ColumnDef<?>> columns) {
 		this.columns = columns;
 	}
 
-	public List<Columns> getColumns() {
+	public List<ColumnDef<?>> getColumns() {
 		return columns;
 	}
 }

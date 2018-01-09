@@ -9,7 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
+import softuni.ticket.Utils;
 
 public class AuthenticateFilter implements Filter {
 
@@ -25,10 +26,11 @@ public class AuthenticateFilter implements Filter {
 
 			if(httpRequest.getRequestURI().startsWith("/authenticate") ||
 				httpRequest.getRequestURI().startsWith("/singNewUser") ||
+				httpRequest.getRequestURI().startsWith("/search") ||
 				(httpRequest.getSession(false) != null))
 				chain.doFilter(request, response);
 			else
-				((HttpServletResponse) response).getWriter().write("You are not authenticated!!");
+				Utils.jsonSerialize("You are not authenticated!!");
 		}
 	}
 

@@ -1,9 +1,12 @@
 package softuni.ticket.JDBC.tablesAndColumns;
 
+import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.Arrays;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
-public class ColumnDef {
+public class ColumnDef<T> {
 	private String name;
 	private DataType type;
 	private String properties;
@@ -14,8 +17,8 @@ public class ColumnDef {
 		this.setProp(prop);
 	}
 	
-	public static ColumnDef col(String name, DataType type, ColumnProperties... prop) {
-		return new ColumnDef(name, type, prop);
+	public static <T> ColumnDef<T> col(String name, DataType type, ColumnProperties... prop) {
+		return new ColumnDef<T>(name, type, prop);
 	}
 
 	private void setProp(ColumnProperties...prop){
@@ -26,32 +29,50 @@ public class ColumnDef {
 		else
 			this.properties = " ";
 	}
+
+	public String getSQL(T val, BiFunction<ColumnDef<T>, T, String> func) {
+		return func.apply(this, val);
+	}
 	
+	public String getEqualsSQL(T val) {
+		if(getType() == DataType.VARCHAR)
+			return getSQL(val, (col, value) -> String.format("%s = 	'%s'", col.getName(), value));
+		else 
+			return null;
+	}
+
 	public String getName() {
 		return name;
 	}
 
-	public String getType() {
-		return type.toString();
+	public DataType getType() {
+		return type;
 	}
+
 	public String getProperties() {
 		return this.properties;
 	}
 
 	public enum DataType {
-		INTEGER("integer"),
-		VARCHAR("varchar"),
-		DATE("date"),
-		DECIMAL("decimal");
+		INTEGER("integer", Integer.class),
+		VARCHAR("varchar", String.class),
+		DATE("date", Date.class),
+		DECIMAL("decimal", BigDecimal.class);
 		
 		private String sqlType;
+		private Class<?> javaType;
 
-		private DataType(String sqlType) {
+		private DataType(String sqlType, Class<?> javaType) {
 			this.sqlType = sqlType;
+			this.javaType = javaType;
 		}
 
 		public String getSqlType() {
 			return sqlType;
+		}
+
+		public Class<?> getJavaType() {
+			return javaType;
 		}
 	}
 	

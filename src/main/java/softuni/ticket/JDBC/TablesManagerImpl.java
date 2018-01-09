@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import softuni.ticket.JDBC.interfaces.JDBCManager;
 import softuni.ticket.JDBC.interfaces.TablesManager;
-import softuni.ticket.JDBC.tablesAndColumns.Columns;
+import softuni.ticket.JDBC.tablesAndColumns.ColumnDef;
 import softuni.ticket.JDBC.tablesAndColumns.Tables;
 
 public class TablesManagerImpl implements TablesManager {
@@ -23,12 +23,10 @@ public class TablesManagerImpl implements TablesManager {
 	}
 	
 	@Override
-	public void createTable(String tableName, List<Columns> columns) throws SQLException {
-		
+	public void createTable(String tableName, List<ColumnDef<?>> columns) throws SQLException {
 		jdbcManager.executeDDL(String.format(CREATE_TABLE, 
 			tableName, 
 			columns.stream()
-			.map(Columns::getColumnDefs)
 			.map(def -> def.getName() 
 					+ " " + def.getType() 
 					+ " " + def.getProperties()).collect(Collectors.joining(", "))));
@@ -55,7 +53,7 @@ public class TablesManagerImpl implements TablesManager {
 	}
 	
 	@Override
-	public void addRimaryKey(Tables table, Columns col) throws SQLException {
-		jdbcManager.executeDDL(String.format(ADD_PR_KEY, table.name(), col.name()));
+	public void addRimaryKey(Tables table, ColumnDef<?> col) throws SQLException {
+		jdbcManager.executeDDL(String.format(ADD_PR_KEY, table.name(), col.getName()));
 	}
 }
